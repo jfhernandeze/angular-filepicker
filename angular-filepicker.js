@@ -1,4 +1,6 @@
-app.directive("filepicker", function(){
+//Inject API KEY
+angular.module('app')
+.directive("filepicker", function(FILEPICKER_APIKEY){
 	return {
 		scope: {
 			callback: '&',
@@ -23,7 +25,8 @@ app.directive("filepicker", function(){
 					path: path,
 					container: container
 				};
-
+				//Set filepicker.io apikey
+				filepicker.setKey(FILEPICKER_APIKEY);
 				filepicker.pickAndStore(picker_options, store_options, function (fpfiles) {
 					scope.$apply(function(){
 						scope.callback({file:fpfiles});
